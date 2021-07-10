@@ -46,7 +46,7 @@ server.get('/weather', (req, res) => {
     let cityObj = selectedCity.data.map(item => {
         return new Forecast(item.valid_date, item.weather.description)
     })
-    res.send(selectedCity);
+    res.send(cityObj);
 })
 
 
