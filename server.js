@@ -12,6 +12,12 @@ server.use(cors())
 
 const PORT = process.env.PORT;
 
+class Forecast {
+    constructor(date, description) {
+        this.date = date;
+        this.description = description;
+    }
+}
 // localhost:3001/
 server.get('/', (req, res) => {
     res.status(200).send('home route');
@@ -37,19 +43,13 @@ server.get('/weather', (req, res) => {
 
     })
 
-    res.send(selectedCity.data);
     let cityObj = selectedCity.data.map(item => {
-        return new City(item.valid_date, item.description)
+        return new Forecast(item.valid_date, item.weather.description)
     })
+    res.send(selectedCity);
 })
 
 
-class City {
-    constructor(date, description) {
-        this.date = date;
-        this.description = description;
-    }
-}
 // try {
 
 //     server.get('/weather', (req, res) => {
